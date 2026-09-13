@@ -19,6 +19,14 @@ kubectl delete -f modules/0X-.../    # sluk igen
 ```
 Chaos-kataer: ét manifest fra `modules/05-chaos/` ad gangen, diagnose fra clusterets status/events/logs, `kubectl delete -f fil.yaml` når den er løst.
 
+## Tænd/sluk hele labben
+Labben er PARKET som standard (ingen Flux-tråd i clusteret). Genstart:
+```bash
+git -C ~/k8s-gitops checkout HEAD~2 -- clusters/home/apps-sync/kube-labs-gitrepository.yaml clusters/home/apps-sync/lab-kustomization.yaml
+# genindsæt de to linjer i clusters/home/apps-sync/kustomization.yaml, commit + push
+```
+Parkér igen (rigtig rækkefølge — Flux ellers genskaber): `kubectl delete kustomization lab -n flux-system` (finalizer rydder indhold), slet `gitrepository kube-labs`, fjern de to filer + referencer i k8s-gitops, commit + push.
+
 ## Røde linjer (alt uden for labben er produktion)
 - Alle ressourcer lever kun i navneområderne `lab-*` — ingen netpol/route/ændring uden for dem.
 - Lab-ressourcer labels `team: lab` — genoprettelse: se nedenunder.
