@@ -11,7 +11,7 @@ Gamle skole først (`exec`, `describe`, `events`, `tcpdump`), Hubble som bonus.
 ## Reset (nødbremse, virker altid)
 ```bash
 flux delete kustomization lab -n flux-system   # GitOps-tråd væk
-kubectl delete ns lab-red lab-blue lab-tools   # alt indhold væk
+kubectl delete ns -l team=lab   # alt indhold væk (lab-* namespaces bærer label)
 # genskab:_flux_/_apply_k8s-gitops_/_lab_kustomization_igen
 ```
 
