@@ -20,4 +20,4 @@ kubectl delete ns -l team=lab   # alt indhold væk (lab-* namespaces bærer labe
 2. `modules/02-networkpolicy` — default-deny, cross-namespace, fejlfinding af blocked traffic
 3. `modules/03-gateway-tls` — HTTPRoute, TLS, intern CA
 4. `modules/04-cilium-under-pooden` — VXLAN, deny-verdicts, L2-annoncering
-5. `modules/05-chaos` — bevidst ødelagte workloads i `broken/`
+5. `modules/05-chaos/` — 5 katas (imagepull, pending-PVC, OOM, readiness-503, netpol-lockout) — apply én ad gangen
