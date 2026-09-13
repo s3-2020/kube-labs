@@ -17,7 +17,7 @@ kubectl apply -f modules/0X-.../     # tænd øvelsen (undtagen modul 1, den kø
 # ...løs EXERCISE.md, kig først i SOLUTION.md bagefter...
 kubectl delete -f modules/0X-.../    # sluk igen
 ```
-Chaos-kataer: ét `broken`-manifest ad gangen, diagnose fra clusterets status/events/logs, `kubectl delete -f fil.yaml` når den er løst.
+Chaos-kataer: ét manifest fra `modules/05-chaos/` ad gangen, diagnose fra clusterets status/events/logs, `kubectl delete -f fil.yaml` når den er løst.
 
 ## Røde linjer (alt uden for labben er produktion)
 - Alle ressourcer lever kun i navneområderne `lab-*` — ingen netpol/route/ændring uden for dem.
