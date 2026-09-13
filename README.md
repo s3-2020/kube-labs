@@ -3,6 +3,22 @@
 Lær at tænke som en CKA: DNS → Services → NetworkPolicy → Gateway → Cilium → chaos.
 Gamle skole først (`exec`, `describe`, `events`, `tcpdump`), Hubble som bonus.
 
+## Kom i gang
+Base-platformen (namespaces, whoami, netshoot) deployes af Flux og er ALTID tændt —
+du skal ikke gøre noget for at starte. Tjek at den lever:
+```bash
+kubectl get ns -l team=lab                  # tre Active
+kubectl -n lab-tools get pods               # to netshoots
+kubectl -n lab-tools exec -it deploy/netshoot -- bash    # din værktøjs-pod
+```
+Pr. modul:
+```bash
+kubectl apply -f modules/0X-.../     # tænd øvelsen (undtagen modul 1, den kører på basen alene)
+# ...løs EXERCISE.md, kig først i SOLUTION.md bagefter...
+kubectl delete -f modules/0X-.../    # sluk igen
+```
+Chaos-kataer: ét `broken`-manifest ad gangen, diagnose fra clusterets status/events/logs, `kubectl delete -f fil.yaml` når den er løst.
+
 ## Røde linjer (alt uden for labben er produktion)
 - Alle ressourcer lever kun i navneområderne `lab-*` — ingen netpol/route/ændring uden for dem.
 - Lab-ressourcer labels `team: lab` — genoprettelse: se nedenunder.
