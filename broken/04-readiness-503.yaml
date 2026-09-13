@@ -1,0 +1,15 @@
+# Pod kører og "Ready: false" — curl dør, men poden ser sund ud
+apiVersion: v1
+kind: Pod
+metadata: { name: kata-04, namespace: lab-tools, labels: { team: lab, app: kata04 } }
+spec:
+  containers:
+    - name: app
+      image: traefik/whoami:v1.12.0
+      ports: [{ containerPort: 80 }]
+      readinessProbe: { httpGet: { path: /, port: 8080 }, periodSeconds: 2 }
+---
+apiVersion: v1
+kind: Service
+metadata: { name: kata-04, namespace: lab-tools }
+spec: { selector: { app: kata04 }, ports: [{ port: 80, targetPort: 80 }] }

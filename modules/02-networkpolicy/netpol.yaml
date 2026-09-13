@@ -1,0 +1,9 @@
+# KØR: kubectl apply -f .   |   SLUK: kubectl delete -f .
+# trin 1: default-deny ALT indgående i lab-red (inkl. DNS!)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: deny-all-ingress, namespace: lab-red }
+spec:
+  podSelector: {}          # ALLE pods i lab-red
+  policyTypes: [Ingress]
+  # ingen regler = ingen trafik velkommen

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Pod
+metadata: { name: kata-03, namespace: lab-tools, labels: { team: lab } }
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh","-c","tail /dev/zero"]   # sluger hukommelse indtil OOM
+      resources: { limits: { memory: 32Mi } }

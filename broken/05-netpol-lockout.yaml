@@ -1,0 +1,7 @@
+# "HVEM har gjort hvad mod hvem" — DNS og web dør i lab-tools
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: { name: kata-05-lock, namespace: lab-tools }
+spec:
+  podSelector: {}
+  policyTypes: [Ingress]
