@@ -1,0 +1,57 @@
+# Identificerbar web-trafik: whoami svarer med pod-navn/IP — perfekt til
+# at se HVORHEN man ramte (og om man overhovedet kom frem).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  namespace: lab-red
+  labels: { team: lab, app: whoami }
+spec:
+  replicas: 2
+  selector: { matchLabels: { app: whoami } }
+  template:
+    metadata: { labels: { app: whoami } }
+    spec:
+      containers:
+        - name: whoami
+          image: traefik/whoami:1.14.0
+          ports: [{ containerPort: 80 }]
+          resources: { requests: { cpu: 10m, memory: 32Mi }, limits: { memory: 64Mi } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+  namespace: lab-red
+  labels: { app: whoami }
+spec:
+  selector: { app: whoami }
+  ports: [{ port: 80, targetPort: 80 }]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  namespace: lab-blue
+  labels: { team: lab, app: whoami }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: whoami } }
+  template:
+    metadata: { labels: { app: whoami } }
+    spec:
+      containers:
+        - name: whoami
+          image: traefik/whoami:1.14.0
+          ports: [{ containerPort: 80 }]
+          resources: { requests: { cpu: 10m, memory: 32Mi }, limits: { memory: 64Mi } }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami
+  namespace: lab-blue
+  labels: { app: whoami }
+spec:
+  selector: { app: whoami }
+  ports: [{ port: 80, targetPort: 80 }]
